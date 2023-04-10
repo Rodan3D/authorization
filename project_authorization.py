@@ -61,7 +61,6 @@ def account_register(login, password):  # регистрация
 
 
 def log_pass_verification(login, password):
-
     for line in read_file():  # проверка на совпадения в БД
         log_file_read = line.split(';')[0]  # логин
         pass_file_read = line.rstrip('\n').split(';')[1]  # пароль
