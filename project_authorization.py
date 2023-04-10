@@ -21,7 +21,11 @@ def write_file(login, password):  # для записи в файл
 
 
 def choice_command(command):  # выбор команды (регистрация или авторизация)
-    login, password = log_pass_input()
+    try:
+        login, password = log_pass_input()
+    except AssertionError as error:
+        print(str(error))
+        return
     if command == REGISTER:
         account_register(login, password)
     elif command == AUTHORIZED:
@@ -32,9 +36,7 @@ def log_pass_input():  # ввод логина и пароля
     login = input('Введите имя пользователя: ')
     password = input('Введите пароль: ')
     # проверка на длину логина и пароля
-    if not (3 < len(login) < 21) or not (4 < len(password) < 33):
-        print('Имя пользователя или пароль слишком короткие!')
-        return None, None
+    assert 3 < len(login) < 21 or 4 < len(password) < 33, 'Имя пользователя или пароль слишком короткие!'
     return login, password
 
 
