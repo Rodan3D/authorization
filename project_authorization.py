@@ -51,15 +51,6 @@ def check_login(login):  # проверка логина при регистра
     return False
 
 
-def account_register(login, password):  # регистрация
-
-    # проверка логина на наличие в БД
-    if check_login(login):
-        return
-    # запись данных в БД
-    write_file(login, password)
-
-
 def log_pass_verification(login, password):
     for line in read_file():  # проверка на совпадения в БД
         log_file_read = line.split(';')[0]  # логин
@@ -78,8 +69,15 @@ def log_pass_verification(login, password):
 
 
 def account_authorize(login, password):  # авторизация
-
     log_pass_verification(login, password)
+
+
+def account_register(login, password):  # регистрация
+    # проверка логина на наличие в БД
+    if check_login(login):
+        return
+    # запись данных в БД
+    write_file(login, password)
 
 
 def main():
